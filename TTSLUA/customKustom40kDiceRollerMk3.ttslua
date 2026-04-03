@@ -358,7 +358,7 @@ function takeDiceOut(tab)
     		params.guid = key
     		local d12Xoffset=0
     		if diceGuids[key]>6 then
-    			 d12Xoffset=-24
+    			 d12Xoffset=-23
     		end
 
             local newXPos

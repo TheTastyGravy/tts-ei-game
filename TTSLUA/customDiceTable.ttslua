@@ -84,37 +84,37 @@ orderedRollGroup3Btn={
 }
 
 add1d6Btn={
-    label="+ 1d6", click_function="spawnDice1", function_owner=self,
+    label="+ 1d12", click_function="spawnDice1", function_owner=self,
     position={-0.5, Yoffset ,-0.87}, rotation={0,0,0}, height=50, width=250,
     font_size=60, color={1,1,1}, font_color={0,0,0}
 }
 add2d6Btn={
-    label="+ 2d6", click_function="spawnDice2", function_owner=self,
+    label="+ 2d12", click_function="spawnDice2", function_owner=self,
     position={0.0, Yoffset ,-0.87}, rotation={0,0,0}, height=50, width=250,
     font_size=60, color={1,1,1}, font_color={0,0,0}
 }
 add3d6Btn={
-    label="+ 3d6", click_function="spawnDice3", function_owner=self,
+    label="+ 3d12", click_function="spawnDice3", function_owner=self,
     position={0.5, Yoffset ,-0.87}, rotation={0,0,0}, height=50, width=250,
     font_size=60, color={1,1,1}, font_color={0,0,0}
 }
 add4d6Btn={
-    label="+ 4d6", click_function="spawnDice4", function_owner=self,
+    label="+ 4d12", click_function="spawnDice4", function_owner=self,
     position={1.0, Yoffset ,-0.87}, rotation={0,0,0}, height=50, width=250,
     font_size=60, color={1,1,1}, font_color={0,0,0}
 }
 add5d6Btn={
-    label="+ 5d6", click_function="spawnDice5", function_owner=self,
+    label="+ 5d12", click_function="spawnDice5", function_owner=self,
     position={1.5, Yoffset ,-0.87}, rotation={0,0,0}, height=50, width=250,
     font_size=60, color={1,1,1}, font_color={0,0,0}
 }
 add10d6Btn={
-    label="+ 10d6", click_function="spawnDice10", function_owner=self,
+    label="+ 10d12", click_function="spawnDice10", function_owner=self,
     position={2.0, Yoffset ,-0.87}, rotation={0,0,0}, height=50, width=250,
     font_size=60, color={1,1,1}, font_color={0,0,0}
 }
 add25d6Btn={
-    label="+ 25d6", click_function="spawnDice25", function_owner=self,
+    label="+ 25d12", click_function="spawnDice25", function_owner=self,
     position={2.5, Yoffset ,-0.87}, rotation={0,0,0}, height=50, width=250,
     font_size=60, color={1,1,1}, font_color={0,0,0}
 }
@@ -155,6 +155,7 @@ customDiceBtn={
 }
 
 clearDiceBtnIncrement=0.28
+clearDiceBtnIncrementX=6
 clearDiceBtnLabel="Del\n"
 clearDiceBtntooltip="LMB Delete this row\nRMB Delete this row and lowers/uppers"
 clearDiceBtn={
@@ -192,7 +193,7 @@ oneTimeUpper=true
 lethalButtonsOffset = -4
 
 lethalLabel = "Lethal Hits"
-lethalTip   = "Left-click: move dice >= 6. Right-click: move dice >= 5."
+lethalTip   = "Left-click: move dice >= 12. Right-click: move dice >= 11."
 lethalHitsBtn={
     label=lethalLabel, tooltip=lethalTip, click_function="lethalHitsAction", function_owner=self,
     position={lethalButtonsOffset, Yoffset ,1.1}, rotation={0,0,0}, height=1000, width=2800, scale={0.1,0.1,0.1},
@@ -200,7 +201,7 @@ lethalHitsBtn={
 }
 
 susLabel = "Sustained Hits"
-susTip   = "Left-click: move dice >= 6. Right-click: move dice >= 5."
+susTip   = "Left-click: move dice >= 12. Right-click: move dice >= 11."
 sustainedHitsBtn={
     label=susLabel, tooltip=susTip, click_function="sustainedHitsAction", function_owner=self,
     position={lethalButtonsOffset + 0.7, Yoffset ,1.1}, rotation={0,0,0}, height=1000, width=3800, scale={0.1,0.1,0.1},
@@ -208,7 +209,7 @@ sustainedHitsBtn={
 }
 
 susLethalLabel = "Sustained & Lethal"
-susLethalTip   = "Left-click: move dice >= 6. Right-click: move dice >= 5. Applies to sustained and lethal combined."
+susLethalTip   = "Left-click: move dice >= 12. Right-click: move dice >= 11. Applies to sustained and lethal combined."
 
 sustainedLethalHitsBtn = {
     label=susLethalLabel, tooltip=susLethalTip, click_function="sustainedLethalHitsAction", function_owner=self,
@@ -463,7 +464,7 @@ sustainedLethalHitsThreshold = 6
 
 rollMode = true
 selectedColor = "White"
-diceType = "Die_6_Rounded"
+diceType = "Die_12"
 customDiceImage = nil
 scaleBtn = 0.1
 previousRollData = {}
@@ -614,11 +615,11 @@ function revertRoll(obj, player, alt)
     -- Destroy current dice and spawn snapshot dice
     for _, die in ipairs(getDice()) do die.destroy() end
     for _, data in ipairs(snapshot) do
-        local diceTypeToSpawn = "Die_6_Rounded"
+        local diceTypeToSpawn = "Die_12"
         if data.customImage then
             diceTypeToSpawn = "Custom_Dice"
         elseif pipColorBtn.color == "Black" then
-            diceTypeToSpawn = "Die_6"
+            diceTypeToSpawn = "Die_12"
         end
         local spawned = spawnObject({ type = diceTypeToSpawn, position = data.pos, rotation = data.rot })
         if data.customImage then spawned.setCustomObject({ image = data.customImage, type = 1 }) end
@@ -650,11 +651,11 @@ function redoRoll(obj, player, alt)
     end
     for _, die in ipairs(getDice()) do die.destroy() end
     for _, data in ipairs(snapshot) do
-        local diceTypeToSpawn = "Die_6_Rounded"
+        local diceTypeToSpawn = "Die_12"
         if data.customImage then
             diceTypeToSpawn = "Custom_Dice"
         elseif pipColorBtn.color == "Black" then
-            diceTypeToSpawn = "Die_6"
+            diceTypeToSpawn = "Die_12"
         end
         local spawned = spawnObject({ type = diceTypeToSpawn, position = data.pos, rotation = data.rot })
         if data.customImage then spawned.setCustomObject({ image = data.customImage, type = 1 }) end
@@ -981,7 +982,7 @@ end
 
 function modifyBtns()
     local sign=""
-    for i=1, 6 do
+    for i=1, 12 do
         if lowerUpper then sign = lowerSign else sign = upperSign end
         self.editButton({ index = (16+i*2), label = clearDiceBtnLabel .. i .. sign })
 
@@ -1049,13 +1050,31 @@ end
 function RollOrSelectDeleteDice6(obj, color, alt)
     SelectDeleteDiceX("Sel", 6, alt, lowerUpper, color)
 end
+function RollOrSelectDeleteDice7(obj, color, alt)
+    SelectDeleteDiceX("Sel", 7, alt, lowerUpper, color)
+end
+function RollOrSelectDeleteDice8(obj, color, alt)
+    SelectDeleteDiceX("Sel", 8, alt, lowerUpper, color)
+end
+function RollOrSelectDeleteDice9(obj, color, alt)
+    SelectDeleteDiceX("Sel", 9, alt, lowerUpper, color)
+end
+function RollOrSelectDeleteDice10(obj, color, alt)
+    SelectDeleteDiceX("Sel", 10, alt, lowerUpper, color)
+end
+function RollOrSelectDeleteDice11(obj, color, alt)
+    SelectDeleteDiceX("Sel", 11, alt, lowerUpper, color)
+end
+function RollOrSelectDeleteDice12(obj, color, alt)
+    SelectDeleteDiceX("Sel", 12, alt, lowerUpper, color)
+end
 
 function SelectDeleteDiceX(action, n, selectOthers, lowUp, color)
     Player[color].clearSelectedObjects()
     selDel = true
     if action == "Del" then selDel = false end
-    local counter = {0,0,0,0,0,0}
-    local numberName = {"ones", "twos", "threes", "fours", "fives", "sixes"}
+    local counter={0,0,0,0,0,0,0,0,0,0,0,0}
+    local numberName={"ones", "twos", "threes", "fours", "fives", "sixes", "sevens", "eights", "nines", "tens", "elevens", "twelves"}
     local text = Player[color].steam_name .. " deleted "
     local somethingToPrint = false
 
@@ -1101,7 +1120,7 @@ function clearDiceAll(obj, color, alt)
     end
     createLethalText(true)
     cleanupLethalHits()
-    clearDiceX(6, true, color)
+    clearDiceX(12, true, color)
     moveDiceBackToBoard(color)
 end
 
@@ -1123,10 +1142,28 @@ end
 function clearDice6(obj, color, alt)
     SelectDeleteDiceX("Del", 6, alt, lowerUpper, color)
 end
+function clearDice7(obj, color, alt)
+    SelectDeleteDiceX("Del", 7, alt, lowerUpper, color)
+end
+function clearDice8(obj, color, alt)
+    SelectDeleteDiceX("Del", 8, alt, lowerUpper, color)
+end
+function clearDice9(obj, color, alt)
+    SelectDeleteDiceX("Del", 9, alt, lowerUpper, color)
+end
+function clearDice10(obj, color, alt)
+    SelectDeleteDiceX("Del", 10, alt, lowerUpper, color)
+end
+function clearDice11(obj, color, alt)
+    SelectDeleteDiceX("Del", 11, alt, lowerUpper, color)
+end
+function clearDice12(obj, color, alt)
+    SelectDeleteDiceX("Del", 12, alt, lowerUpper, color)
+end
 
 function clearDiceX(n, deleteLower, color)
-    local counter={0,0,0,0,0,0}
-    local numberName={"ones", "twos", "threes", "fours", "fives", "sixes"}
+    local counter={0,0,0,0,0,0,0,0,0,0,0,0}
+    local numberName={"ones", "twos", "threes", "fours", "fives", "sixes", "sevens", "eights", "nines", "tens", "elevens", "twelves"}
     local text = Player[color].steam_name .. " deleted "
     local somethingToPrint=false
         for i, die in ipairs(getDice()) do
@@ -1194,10 +1231,10 @@ function spawnDice(n,player)
 
     if offset+n>128 then n=128-offset end
     for i=1, n do
-    local die=spawnObject({
-        type              = diceType,
-        position          = self.positionToWorld({4-grid*1.5-col*0.25,0.5,-0.3+row*0.25}),
-        rotation          = self.getRotation() + Vector(0.0, 180.0, 0.0),
+        local die=spawnObject({
+            type              = diceType,
+            position          = self.positionToWorld({4-grid*1.5-col*0.25,0.5,-0.3+row*0.25}),
+            rotation          = self.getRotation() + Vector(27.0, 180.0, 72.0),
         })
         col=col+1
         if col>4 then
@@ -1246,7 +1283,7 @@ end
 
 function sustainedHitsAction(_, color, alt)
     -- Left-click: apply 6+. Right-click (alt): apply 5+. No toggle.
-    local threshold = alt and 5 or 6
+    local threshold = alt and 11 or 12
     local diceToClone = {}
 
     -- Helper: compare positions (x,z) with small epsilon
@@ -1320,7 +1357,7 @@ end
 -- New function for combined action
 function sustainedLethalHitsAction(_, color, alt)
     -- Left-click: apply 6+. Right-click: apply 5+. No toggle.
-    local threshold = alt and 5 or 6
+    local threshold = alt and 11 or 12
     local sixPositions = {}
     local sixDice = {}
 
@@ -1542,13 +1579,21 @@ function onload()
     self.createButton(warningBtn)
     self.createButton(pipColorBtn)
     local sign=""
-    for i=1, 6 do
+    for i=1, 12 do
         if lowerUpper then sign= lowerSign else sign=upperSign end
+        if (i == 7) then
+            clearDiceBtn.position[1]=clearDiceBtn.position[1]+clearDiceBtnIncrementX
+            clearDiceBtn.position[3]=clearDiceBtn.position[3]-(clearDiceBtnIncrement*6)
+        end
         clearDiceBtn.position[3]=clearDiceBtn.position[3]+clearDiceBtnIncrement
         clearDiceBtn.click_function="clearDice"..i
         clearDiceBtn.label=clearDiceBtnLabel..i..sign
         self.createButton(clearDiceBtn)
 
+        if (i == 7) then
+            rollOrSelectDiceBtn.position[1]=rollOrSelectDiceBtn.position[1]+clearDiceBtnIncrementX
+            rollOrSelectDiceBtn.position[3]=rollOrSelectDiceBtn.position[3]-(clearDiceBtnIncrement*6)
+        end
         rollOrSelectDiceBtn.position[3] = rollOrSelectDiceBtn.position[3] + clearDiceBtnIncrement
         rollOrSelectDiceBtn.label = "Roll\n" .. i .. sign
         rollOrSelectDiceBtn.tooltip = "LMB Re-rolls this row\nRMB Re-rolls this row and lowers/uppers"
@@ -2014,9 +2059,9 @@ function lethalHitsAction(lethalHits, color, alt)
     local oldLethal = lethalHitsThreshold
     local oldSustainedLethal = sustainedLethalHitsThreshold
     if lethalNumbers then
-        sustainedLethalHitsThreshold = alt and 5 or 6
+        sustainedLethalHitsThreshold = alt and 11 or 12
     else
-        lethalHitsThreshold = alt and 5 or 6
+        lethalHitsThreshold = alt and 11 or 12
     end
 
     local moved = moveLethalHits(lethalNumbers)
@@ -2059,20 +2104,20 @@ function modifyMenu(color)
     self.editButton({index=9, color=color})
     self.editButton({index=10, color=color})
     self.editButton({index=11, color=color})
-    self.editButton({index=32, color=color})
-    self.editButton({index=33, color=color})
-    self.editButton({index=34, color="White"})
-    self.editButton({index=35, color="White"})
-    self.editButton({index=36, color="White"})
+    self.editButton({index=44, color=color})
+    self.editButton({index=45, color=color})
+    self.editButton({index=46, color="White"})
+    self.editButton({index=47, color="White"})
+    self.editButton({index=48, color="White"})
 end
 
 function setDiceType()
     if customDiceImage ~= nil then
         diceType = "Custom_Dice"
     elseif pipColorBtn.color == "White" then
-        diceType = "Die_6_Rounded"
+        diceType = "Die_12"
     else
-        diceType = "Die_6"
+        diceType = "Die_12"
     end
 end
 

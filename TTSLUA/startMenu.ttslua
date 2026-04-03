@@ -2565,6 +2565,7 @@ firstPlayerBtn = {
     position = {0, 5, 1}, rotation = {0, 0, 0}, height = 750, width = 5000,
     font_size = 300, color = {1, 0, 0}, font_color = {1, 1, 1}
 }
+--[[
 feedbackBtn = {
     index = 1, label = "Feedback", click_function = "openFeedbackPopup", function_owner = self,
     position = {17, 5, 2.8}, rotation = {0, 0, 0}, height = 550, width = 5000,
@@ -2586,6 +2587,7 @@ IncrementBlueCpBtn = {
     position = {46.2, 5, -3.75}, rotation = {0, 0, 0}, height = 1650, width = 3000,
     font_size = 600, color = {0, 0, 1}, font_color = {1, 1, 1}
 }
+--]]
 endTrackedGameBtn = {
     index = 1, label = "END GAME", tooltip = "Send final game result to API", click_function = "endTrackedGame", function_owner = self,
     position = {0, 5, 3.8}, rotation = {0, 0, 0}, height = 700, width = 3600,
