@@ -91,6 +91,8 @@ function updateForSelectedPack()
     missionPackData = Global.getTable("missionPackData")[selectedPack]
     secondaryDeck = getObjectFromGUID(missionPackData[string.lower(playerColor) .. "SecondaryDeck_GUID"])
 
+    -- IE: we're not doing these secondary objectives
+    do return end
     self.clearButtons()
     self.createButton(lockInSecondariesBtn)
 end
@@ -116,6 +118,9 @@ function onPlayerChangeColor(player_color)
 end
 
 function tryDealFixedSecondaries()
+    -- IE: we're not doing these secondary objectives
+    do return end
+
     -- Only deal out the cards if our player is seated, we know what mission pack
     -- we're playing, and we haven't already dealt them.
     if Player[playerColor].seated and selectedPack and not cardsDealt then

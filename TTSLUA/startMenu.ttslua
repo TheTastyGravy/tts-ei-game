@@ -2654,8 +2654,8 @@ function writeDeployMenu()
 end
 
 function writeIngameMenu()
-    self.createButton(IncrementRedCpBtn)
-    self.createButton(IncrementBlueCpBtn)
+    --self.createButton(IncrementRedCpBtn)
+    --self.createButton(IncrementBlueCpBtn)
     self.createButton(deployOffsetMenuBtn)
     self.createButton(deployOffsetUpBtn)
     self.createButton(deployOffsetDownBtn)
@@ -2667,6 +2667,7 @@ function writeIngameMenu()
         self.createButton(endTrackedGameBtn)
     end
 
+    --[[
     nextPhaseBtn.color = currentTurn
     local visibleTo=nextPhaseBtn.color
     Global.UI.setAttribute("passTurn", "visibility", visibleTo)
@@ -2677,6 +2678,7 @@ function writeIngameMenu()
     end
     Global.UI.setValue("passTurnTxt", nextPhaseBtn.label)
     self.createButton(nextPhaseBtn)
+    --]]
 end
 
 function getContainedItems(container)
@@ -3195,6 +3197,8 @@ function startGame(obj, player, alt)
         shouldStartTrackedSync = false
     end
     if singlesMode ~= "singles" then
+        -- IE: we're not doing these secondary objectives
+        --[[
         local count = Global.getVar("LOCKED_IN_SECONDARIES")
         forceStartCounter = forceStartCounter or 0
 
@@ -3212,6 +3216,7 @@ function startGame(obj, player, alt)
         else
             forceStartCounter = 0
         end
+        --]]
 
         -- Count the number of players (if needed later)
         local playerList = Player.getPlayers()
