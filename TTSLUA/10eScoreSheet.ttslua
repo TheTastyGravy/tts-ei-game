@@ -557,7 +557,7 @@ function playerSum(pId)
 	if sec_sum > 40 then sec_sum = 40 end
 	if chl_sum > 12 then chl_sum = 12 end
 
-	local score = pri_sum + sec_sum + chl_sum + 10
+	local score = pri_sum + sec_sum + chl_sum
 	if score > 100 then score = 100 end
 	-- painted army gives +10
 
